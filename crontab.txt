@@ -1,0 +1,2 @@
+0 * * * * /home/vladi/scripts/cron_date.sh
+0 7 * * * /home/vladi/scripts/cron_weather.sh
