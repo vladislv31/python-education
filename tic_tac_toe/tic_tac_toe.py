@@ -17,8 +17,6 @@ class TicTacToe: # pylint: disable=too-few-public-methods
                             [0, 3, 6], [1, 4, 7], [2, 5, 8],
                             [0, 4, 8], [2, 4, 6]]
 
-    _area_squares_letters = ['a', 'b', 'c', 'e', 'f', 'g', 'h', 'i', 'j']
-
     _game_area = None
     _players = None
     _current_player = None
@@ -98,7 +96,7 @@ class TicTacToe: # pylint: disable=too-few-public-methods
 
             self._players = [first_player, second_player]
 
-        self._game_area = [-1 for _ in range(9)]
+        self._game_area = list(range(1, 10))
         round_count = 0
 
         self._is_playing = True
@@ -168,16 +166,16 @@ class TicTacToe: # pylint: disable=too-few-public-methods
     def _update_game_area_with_turn(self, player_turn):
         '''Method updating game area during to player turn'''
 
-        area_box_index = self._area_squares_letters.index(player_turn)
+        area_box_index = player_turn - 1
         self._game_area[area_box_index] = self._current_player.get_team()
 
     def _input_turn(self):
         '''Method allows user to input turn'''
 
         try:
-            turn = input(f'{self._current_player.get_name()}, your turn: ')
+            turn = int(input(f'{self._current_player.get_name()}, your turn: '))
 
-            while self._game_area[self._area_squares_letters.index(turn)] != -1:
+            while self._game_area[turn - 1] in ['O', 'X']:
                 turn = input('This square is already occupied, try again: ')
         except ValueError:
             print('Incorrect square choice...')
@@ -188,7 +186,7 @@ class TicTacToe: # pylint: disable=too-few-public-methods
     def _check_if_no_moves(self):
         '''Method checking for moves availability :)'''
 
-        return len(list(filter(lambda x: x == -1, self._game_area))) == 0
+        return len(list(filter(lambda x: x not in ['X', 'O'], self._game_area))) == 0
 
     def _print_players_scores(self):
         '''Method prints players scores as header'''
@@ -207,10 +205,7 @@ class TicTacToe: # pylint: disable=too-few-public-methods
             if idx % 3 == 0:
                 print('|', end='')
 
-            if square == -1:
-                print(f' {self._area_squares_letters[idx]} |', end='')
-            else:
-                print(f' {square} |', end='')
+            print(f' {square} |', end='')
 
             if idx % 3 == 2:
                 print('\n-------------')
