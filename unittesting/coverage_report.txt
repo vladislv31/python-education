@@ -1,0 +1,9 @@
+Name                                Stmts   Miss  Cover
+-------------------------------------------------------
+unittesting/shop.py                    57      0   100%
+unittesting/tests/__init__.py           0      0   100%
+unittesting/tests/test_product.py      33      0   100%
+unittesting/tests/test_shop.py         57      2    96%
+unittesting/tests/test_utils.py        18      0   100%
+-------------------------------------------------------
+TOTAL                                 165      2    99%
